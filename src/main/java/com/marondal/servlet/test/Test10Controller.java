@@ -2,6 +2,7 @@ package com.marondal.servlet.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,8 @@ public class Test10Controller extends HttpServlet {
 		} else {
 			out.println("<h1>" + userMap.get("name") + "님 환영합니다. </h1>");
 		}
+		
+
 		
 		out.println("</body></html>");
 	}
