@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-	<form method="get" action="/jsp/test/test03">
+	<form method="get" action="/jsp/test/test03.jsp">
 	<h2>날짜, 시간 링크</h2>
 	<a href="/jsp/test/test03.jsp?what=time" class="btn btn-success">현재 시간 확인</a>
 	<a href="/jsp/test/test03.jsp?what=time" class="btn btn-info">현재 날짜 확인</a>

@@ -32,8 +32,10 @@
 	    list.add(map);
 	    
 	    String menu = request.getParameter("menu");
+	    String point = request.getParameter("point");
 	    
 	%>
+	
 	<div class="container">
 	<h1 class="text-center">검색결과</h1>
 	
@@ -48,20 +50,32 @@
 				<% for(Map<String, Object> store:list) { 
 					// 메뉴명이 일치하는지
 					if(menu.equals(store.get("menu"))) {
+						// 별점이 4.0 이상인지
+						// Down Casting
+						double targetPoint = (Double)store.get("point");
+						// 체크가 안되었을때 또는
+						// ponit가 체크가 된 상태일때, targetPoint가 4.0 이상인 것
+						// or 연산자: 앞이 참이며 뒤에는 해당사항이 없어서 조건을 당연히 안탄다. 그래서 아래로 줄여서 작성이 가능하다.
+						// if(point == null || (point.equals("limit") && targetPoint >= 4.0)) { 
+				//		if(point == null || targetPoint >= 4.0) { 
 						
-			
-					
-					// 별점이 4.0 이상인지
-					// Down Casting
-					double point = (Double)store.get("point");
-				
+						//메뉴명이 일치하지 않으면, 아래 태그 포함하지 말아라
+						if(!menu.equals(store.get("munu"))) {
+							continue;
+						}
+						
+						// point가 체크가 된 상태, targetPoint가 4.0미만
+						if(point != null && targetPoint < 4.0) {
+							continue;
+						}
 				%>
-				<tr>
-					<td><%= store.get("menu") %></td>
-					<td><%= store.get("name") %></td>
-					<td><%= store.get("point") %></td>
-				</tr>
-				<% } 
+							<tr>
+								<td><%= store.get("menu") %></td>
+								<td><%= store.get("name") %></td>
+								<td><%= store.get("point") %></td>
+							</tr>
+				<% }
+				   // } 
 				
 				} %>	
 				

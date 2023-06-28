@@ -12,7 +12,7 @@
  	<div class="container">
  	
  		<h1>길이변환</h1>
- 		<form metho="post" action="/jsp/test/test05.jsp">
+ 		<form method="post" action="/jsp/test/test05.jsp">
 	 		<input type="text" name="cm">cm
 	 		<br>
 	 		<label>인치<input type="checkbox" name="unit" value="inch"></label>
