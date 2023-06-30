@@ -91,27 +91,42 @@
 	    musicInfo.put("lyricist", "아이유");
 	    musicList.add(musicInfo);
 	    
-	    int id = Integer.parseInt(request.getParameter("id"));
+	    String idString = request.getParameter("id");  // null값이 전달되려면 일단 순수 그대로 string으로 일단 받아라!! 그리고 검증한 후 int로 변경하기
+	    
+	    int id = 0;
+	    if(idString != null) {
+	    	id = Integer.parseInt(idString);
+	    }
+	    String title = request.getParameter("title");
 	%>
 
 	<jsp:include page="header.jsp" />
 	<jsp:include page="menu.jsp" />
 	<section class="main-content">
+			<h3>곡 정보</h3>
 			<div class="song-info d-flex border border-success p-3">
-			<% for(int i = 0; i < musicList.size(); i++) { 
-				Map<String, Object> detail = musicList.get(i);
-				int target = (Integer)detail.get("id");
+			<% for(Map<String, Object> music:musicList) { 
 				
-				if(target == id) { %>
-				<img alt="앨범 이미지" width="200" src="<%= detail.get("thumbnail")%>">
-				<div class="datail">
-					<div class="display-4 ml-3"><%= detail.get("title")%></div>
-					<div class="display-5 mt-2 ml-3 text-success font-weight-bold"><%= detail.get("singer")%></div>
-					<div class="display-5 mt-1 ml-3">
-						<div>앨범 <span><%= detail.get("album")%></span></div>
-						<div>재생시간 <span><%= detail.get("time")%></span></div>
-						<div>작곡가 <span><%= detail.get("composer")%></span></div>
-						<div>작사가 <span><%= detail.get("lyricist")%></span></div>
+				int targetId = (Integer)music.get("id");
+				
+				// id 파라미터가 전달되었고, id가 일치하면,
+				// title 파라미터가 전달되었고, title이 일치하면
+				if((idString != null && targetId == id)   // id가 전달되면 id값 비교
+					|| (title != null && title.equals(music.get("title")))) {   // title이 전달되면 title값 비교 
+				
+					int time = (Integer)music.get("time"); // 분, 초를 나누기 위해 다운캐스팅 필요함
+					int minute = time / 60;
+					int second = time % 60;
+			%>
+				<img alt="<%= music.get("title")%>" width="200" src="<%= music.get("thumbnail") %>">
+				<div class="ml-3">
+					<div class="display-4 ml-3"><%= music.get("title")%></div>
+					<div class="display-5 mt-2 ml-3 text-success font-weight-bold"><%= music.get("singer") %></div>
+					<div class="small ml-3 mt-3">
+						<div>앨범 - <%= music.get("album") %></div>
+						<div>재생시간 - <%= minute %>:<%= second %></div>
+						<div>작곡가 - <%= music.get("composer") %></div>
+						<div>작사가 - <%= music.get("lyricist") %></div>
 					</div>
 				</div>	
 			<% } 
@@ -124,10 +139,8 @@
 				<div>가사 정보 없음</div>
 				<hr>
 			</div>
-		</section>
-	
-	
 	</section>
+
 
 	<jsp:include page="footer.jsp" />
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

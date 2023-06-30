@@ -89,6 +89,8 @@
 	    musicInfo.put("composer", "아이유,이종훈,이채규");
 	    musicInfo.put("lyricist", "아이유");
 	    musicList.add(musicInfo);
+	    
+
 	%>
 
 	<div class="wrap">
@@ -115,14 +117,16 @@
 						</tr>
 					</thead>
 					<tbody>
-					<% for(int i = 0; i < musicList.size(); i++) { 
-						Map<String, Object> music = musicList.get(i); %>
-						<tr>
+					<% for(Map<String, Object> music : musicList) {
+						String title = (String)music.get("title"); %>
+<tr>
 							<td><%= music.get("id") %></td>
-							<td><a href="/jspT/test/test02/detail.jsp?id=2"><%= music.get("title") %></a></td>
+							<td><a href="/jspT/test/test02/detail.jsp?id=<%= music.get("id") %>"><%= music.get("title") %></a></td>
 							<td><%= music.get("album") %></td>
 						<tr>
-					<% } %>
+					<%  
+					
+					}%>
 					</tbody>
 				</table>
 			</div>
