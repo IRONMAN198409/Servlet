@@ -15,40 +15,86 @@ import com.marondal.common.MysqlService;
 @WebServlet("/db/test01")
 public class Test01Controller extends HttpServlet {
 	@Override
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/plain");
+		
 		PrintWriter out = response.getWriter();
 		
-		MysqlService mysqlService = MysqlService.getInstance(); 
-		// 접속
+		// mysql 접속
+		MysqlService mysqlService = MysqlService.getInstance();
 		mysqlService.connect();
 		
-		// inset
-		String insertQuery = "INSERT INTO `real_estate`\r\n"
-				+ "(`realtorId`, `address`, `area`, `type`, `price`, `rentPrice`)\r\n"
-				+ "VALUE \r\n"
-				+ "(3, '헤라펠리스 101동 5305호', 350, '매매', 1500000, NULL);";
+		// 쿼리 수행
+//		String insertQuery = "INSERT INTO `real_estate`\r\n"
+//				+ "(`realtorId`, `address`, `area`, `type`, `price`)\r\n"
+//				+ "VALUE \r\n"
+//				+ "(3, '헤라펠리스 101동 5305호', 350, '매매', 1500000);";
+//		
+//		int count = mysqlService.update(insertQuery);
+//		
+//		out.println("insert된 행의 개수 : " + count);
 		
-		int count = mysqlService.update(insertQuery);
-		
-		// select
-		String selectQuerty = "SELECT `address`, `area`, `type` \r\n"
+		String selectQuery = "SELECT `address`, `area`, `type` \r\n"
 				+ "FROM `real_estate` \r\n"
 				+ "ORDER BY `id` DESC \r\n"
 				+ "LIMIT 10;";
 		
-		ResultSet resultSet = mysqlService.select(selectQuerty);
-		
+		ResultSet resultSet = mysqlService.select(selectQuery);
 		try {
-			while(resultSet.next() ) {
+			while(resultSet.next()) {
+				
+				// 주소, 면적, 타입
 				String address = resultSet.getString("address");
 				int area = resultSet.getInt("area");
 				String type = resultSet.getString("type");
-				
-				out.println("매물 주소 : " + address + ", 면적 : " + area + ", 타입 : " + type);
+				out.println("매물 주소 : " + address + ", 면적 " + area + ", 타입 : " + type);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
+		// 접속 끊기
+		mysqlService.disconnect();
+		
+		
 	}
+	
+//	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//		response.setContentType("text/plain");
+//		PrintWriter out = response.getWriter();
+//		
+//		MysqlService mysqlService = MysqlService.getInstance(); 
+//		// 접속
+//		mysqlService.connect();
+//		
+//		// inset
+//		String insertQuery = "INSERT INTO `real_estate`\r\n"
+//				+ "(`realtorId`, `address`, `area`, `type`, `price`, `rentPrice`)\r\n"
+//				+ "VALUE \r\n"
+//				+ "(3, '헤라펠리스 101동 5305호', 350, '매매', 1500000, NULL);";
+//		
+//		int count = mysqlService.update(insertQuery);
+//		
+//		// select
+//		String selectQuerty = "SELECT `address`, `area`, `type` \r\n"
+//				+ "FROM `real_estate` \r\n"
+//				+ "ORDER BY `id` DESC \r\n"
+//				+ "LIMIT 10;";
+//		
+//		ResultSet resultSet = mysqlService.select(selectQuerty);
+//		
+//		try {
+//			while(resultSet.next() ) {
+//				String address = resultSet.getString("address");
+//				int area = resultSet.getInt("area");
+//				String type = resultSet.getString("type");
+//				
+//				out.println("매물 주소 : " + address + ", 면적 : " + area + ", 타입 : " + type);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }
