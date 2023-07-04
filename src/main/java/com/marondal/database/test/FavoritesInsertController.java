@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.marondal.common.MysqlService;
 
-@WebServlet("/db/favories/insert")
-public class UserInsertController extends HttpServlet {
+
+@WebServlet("/db/favorites/insert")
+public class FavoritesInsertController extends HttpServlet {
 
 		@Override 
 		public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

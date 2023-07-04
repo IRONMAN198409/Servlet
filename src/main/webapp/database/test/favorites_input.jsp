@@ -10,13 +10,12 @@
 <body>
 	<div class="container">
 		<h2>즐겨찾기 추가</h2>
-		
-		<form method="post" action="/db/favories/insert">
-		<label class="font-weight-bold">사이트명: </label><br>
-		<input type="text" class="form-control col-5" name="name"> <br>
-		<label class="font-weight-bold">사이트 주소: </label><br>
-		<input type="text" class="form-control col-5" name="url"> <br>
-		<button type="submit" class="btn btn-success">추가</button>
+		<form method="post" action="/db/favorites/insert">
+			<label class="font-weight-bold">사이트명: </label><br>
+			<input type="text" class="form-control col-5" name="name"> <br>
+			<label class="font-weight-bold">사이트 주소: </label><br>
+			<input type="text" class="form-control col-5" name="url"> <br>
+			<button type="submit" class="btn btn-success">추가</button>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

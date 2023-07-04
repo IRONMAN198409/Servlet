@@ -26,6 +26,7 @@
 				<tr>
 					<th>사이트</th>
 					<th>사이트 주소</th>
+					<th>사이트 삭제</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,13 +34,15 @@
 				<tr>
 					<td><%= resultSet.getString("name") %></td>
 	    			<td><a href="<%= resultSet.getString("url") %>"><%= resultSet.getString("url") %></a></td>
-	    			<td><a href="/db/favories/delete?id=<%= resultSet.getInt("id") %>">삭제</a></td>
+	    			<td><a href="/db/favorites/delete?id=<%= resultSet.getInt("id") %>">삭제</a></td>
 				</tr>
 			<% } %>
 			</tbody>
 		</table> 
 		
-		<a href="/database/test/user_input.jsp">추가하기</a>
+		<a href="/database/test/favorites_input.jsp">사이트 추가 Go</a>
+
+		
 	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
